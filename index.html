@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رحلة الأرقام – الصف الرابع</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap">
+<style>
+:root{--bg:#EEF6F4;--card:#fff;--ink:#17313B;--mut:#5B7480;--teal:#0E6B73;--sun:#FFC83D;--coral:#E8553F;--ok:#1E9E5A;--line:#CFE0DE;--soft:#E3F1EF;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1E22;--card:#172B30;--ink:#E7F1F0;--mut:#9DB5B8;--teal:#4FC3CC;--line:#2A464C;--soft:#1F3A40;--ok:#4CD08A;--coral:#FF7A63}}
+:root[data-theme="dark"]{--bg:#0F1E22;--card:#172B30;--ink:#E7F1F0;--mut:#9DB5B8;--teal:#4FC3CC;--line:#2A464C;--soft:#1F3A40;--ok:#4CD08A;--coral:#FF7A63}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif;font-size:19px;line-height:1.7}
+.wrap{max-width:720px;margin:0 auto;padding:14px}
+.n{direction:ltr;unicode-bidi:isolate;display:inline-block;font-variant-numeric:lining-nums;white-space:nowrap}
+#bar{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.dot{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--soft);border:2px solid var(--line);font-size:19px}
+.dot.cur{border-color:var(--teal);background:var(--sun)}
+.dot.ok{background:var(--teal);border-color:var(--teal)}
+.score{margin-inline-start:auto;background:var(--sun);color:#17313B;padding:2px 14px;border-radius:99px;font-weight:800}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:20px}
+.meta{color:var(--mut);font-size:16px;display:flex;justify-content:space-between;gap:8px;margin-bottom:8px}
+.q{font-weight:800;font-size:22px;line-height:1.8;margin-bottom:10px}
+.vis{background:var(--soft);border-radius:12px;padding:12px;margin:10px 0;overflow-x:auto;text-align:center}
+.opts{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px;direction:ltr}
+@media(max-width:480px){.opts{grid-template-columns:1fr}}
+.opt{font:inherit;color:inherit;display:flex;align-items:center;gap:10px;direction:ltr;text-align:start;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;min-height:56px}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt:focus-visible,.btn:focus-visible,.in:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.opt>span{flex:1;unicode-bidi:plaintext;text-align:left}
+.opt .L{flex:none;width:32px;height:32px;border-radius:8px;background:var(--teal);color:#fff;display:grid;place-items:center;font-family:Georgia,serif}
+.opt.sel{border-color:var(--teal);background:var(--soft)}
+.opt.good{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+.opt.bad{border-color:var(--coral);opacity:.6}
+.fill{margin:12px 0;font-weight:700}
+.fill>div{margin:8px 0}
+.eq{direction:ltr;unicode-bidi:isolate;text-align:center;font-size:24px;font-weight:800}
+.in{font:inherit;direction:ltr;text-align:center;width:6em;max-width:34vw;border:2px solid var(--line);border-bottom-width:4px;border-radius:10px;background:var(--card);color:var(--ink);padding:2px 6px;margin:0 4px}
+.select.in,select.in{appearance:auto;padding:4px 8px;cursor:pointer;width:auto;min-width:7em}
+.in.good{border-color:var(--ok)}
+.in.bad{border-color:var(--coral)}
+.fb{min-height:30px;margin:12px 0 4px;font-weight:700}
+.fb.g{color:var(--ok)}.fb.b{color:var(--coral)}
+.why{background:var(--soft);border-radius:10px;padding:8px 12px;margin-top:8px;font-weight:400;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.btn{font:inherit;font-weight:800;border:0;border-radius:12px;padding:10px 24px;background:var(--teal);color:#fff;cursor:pointer}
+:root:not([data-theme="light"]) .btn{color:#0F1E22}
+.btn.alt{background:var(--sun);color:#17313B!important}
+.btn[hidden]{display:none}
+.vert{display:inline-flex;flex-direction:column;align-items:flex-end;direction:ltr;font-size:26px;font-weight:800}
+.vert span:last-child{border-top:3px solid var(--ink);padding-top:2px}
+table.t{margin:0 auto;border-collapse:collapse;min-width:260px}
+.t th,.t td{border:2px solid var(--line);padding:6px 16px}
+.t th{background:var(--teal);color:#fff}
+.blocks{display:flex;flex-direction:column;gap:10px;align-items:center;direction:ltr}
+.br{display:flex;gap:14px;align-items:flex-end}
+.bg{display:flex;gap:4px;align-items:flex-end}
+.h,.tn,.on{background-color:#8CC63F;background-image:linear-gradient(#0003 1px,transparent 1px),linear-gradient(90deg,#0003 1px,transparent 1px);border:1.5px solid #4E8A1B}
+.h{width:42px;height:42px;background-size:4.2px 4.2px}
+.tn{width:6px;height:42px;background-size:6px 4.2px}
+.on{width:7px;height:7px;background-size:7px 7px}
+.vcol{display:inline-flex;flex-direction:column;direction:ltr;font-size:28px;font-weight:800;gap:4px;min-width:200px}
+.vr{display:flex;justify-content:space-between;gap:20px;direction:ltr}
+.vr.ln{border-bottom:4px solid var(--ink);padding-bottom:4px}
+.vcol .in{width:100%;max-width:none;margin:6px 0 0;font-size:28px;text-align:right}
+.big{font-size:44px;line-height:1.3;margin:0 0 6px}
+.stars{font-size:34px;letter-spacing:4px}
+.res{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:6px 0}
+@media(prefers-reduced-motion:no-preference){.shake{animation:sh .3s}}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="bar"></div>
+  <div id="app" class="card"></div>
+</div>
+<script>
+const E=s=>`<bdi class="n">${s}</bdi>`;
+const N=x=>E(String(x).replace(/\B(?=(\d{3})+(?!\d))/g,' '));
+const tbl=(h,rows)=>`<table class="t"><tr><th colspan="2">${h}</th></tr>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`;
+const lib=()=>tbl('عدد الكتب في إحدى المكتبات',[['كتب الأطفال',N(17157)],['الكتب العلمية',N(17412)],['الكتب التاريخية',N(17421)],['الكتب الدينية',N(17831)]]);
+const park=()=>tbl('زوار حديقة البدع',[[E(2022),N(44539)],[E(2021),N(29520)]]);
+const row=()=>`<div class="br"><div class="bg"><i class="h"></i><i class="h"></i><i class="h"></i></div><div class="bg"><i class="tn"></i><i class="tn"></i></div><div class="bg" style="flex-wrap:wrap;width:20px"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>`;
+const blocks=()=>`<div class="blocks">${row()}${row()}</div>`;
+const vert=()=>`<div class="vcol"><div class="vr"><b></b><span>12 566</span></div><div class="vr ln"><b>+</b><span>5 532</span></div></div>`;
+
+const S=[
+{n:'اختر الإجابة الصحيحة',ic:'🎯',qs:[
+ {t:'mc',q:`اكتب الصيغة التحليلية للعدد ${N(25830)}؟`,o:[E('2000 + 500 + 80 + 3'),E('2000 + 500 + 80 + 30'),E('20000 + 500 + 800 + 3'),E('20000 + 5000 + 800 + 30')],a:3,w:`${N(25830)} = ${E('20 000 + 5 000 + 800 + 30')}`},
+ {t:'mc',q:'في أي عدد قيمة الرقم 4 الأول تساوي 10 أضعاف قيمة الرقم 4 الثاني؟',o:[N(36244),N(36434),N(34624),N(45634)],a:0,w:`في ${N(36244)} قيمة الرقم 4 الأول 40 والثاني 4، و ${E('40 = 10 × 4')}.`},
+ {t:'mc',q:'أوجد ناتج الجمع:',v:vert,o:[N(18098),N(18099),N(28098),N(30000)],a:0,w:`${E('12 566 + 5 532 = 18 098')}`},
+ {t:'mc',q:`ما ناتج الضرب ${E('3 × 3000')}؟`,o:[E(600),E(900),N(6000),N(9000)],a:3,w:`${E('3 × 3 = 9')} ثم نضيف ثلاثة أصفار: ${N(9000)}`},
+ {t:'mc',q:`ما تقدير ناتج الضرب ${E('392 × 3')}؟`,o:[E(12),E(120),N(1200),N(12000)],a:2,w:`نقرّب 392 إلى 400، ثم ${E('400 × 3 = 1 200')}`},
+ {t:'mc',q:'ما جملة الضرب التي تبينها قوالب القيم المنزلية أدناه؟',v:blocks,o:[E('2 × 324'),E('2 × 648'),E('3 × 324'),E('3 × 648')],a:0,w:'كل صف يمثل 324 (3 مئات و2 عشرات و4 آحاد)، وعدد الصفوف 2.'}
+]},
+{n:'مكتبة الكتب',ic:'📚',qs:[
+ {t:'mc',q:'الجدول أدناه يبين أعداد أنواع الكتب في إحدى المكتبات. ما الكتب التي تعدادها هو الأكثر في المكتبة؟',v:lib,o:['كتب الأطفال','الكتب العلمية','الكتب التاريخية','الكتب الدينية'],a:3,w:`${N(17831)} هو أكبر عدد في الجدول.`},
+ {t:'mc',q:'ما الكتب التي تعدادها هو الأقل في المكتبة؟',v:lib,o:['كتب الأطفال','الكتب العلمية','الكتب التاريخية','الكتب الدينية'],a:0,w:`${N(17157)} هو أصغر عدد في الجدول.`},
+ {t:'fill',q:`اكتب العدد الأكبر بين العددين ${N(118157)} و ${N(218421)}`,f:'<div class="eq">{0}</div>',o:[[118157,218421,218412,128421]],a:[218421],w:'العددان من ستة أرقام؛ نقارن منزلة مئات الآلاف: 2 أكبر من 1.'}
+]},
+{n:'الأعداد والتقريب',ic:'🔢',qs:[
+ {t:'fill',q:'باستعمال الصيغة القياسية، اكتب العدد: خمسة وثلاثون ألفاً وأربعمائة وخمسة عشر',f:'<div class="eq">{0}</div>',o:[[35415,35145,305415,35450]],a:[35415],w:`${N(35415)}`},
+ {t:'multi',q:`اكتب قيمة الرقم 5 في العدد ${N(25653)} (اختر كل القيم الصحيحة)`,o:[E(5),E(50),E(500),N(5000)],c:[1,3],w:`الرقم 5 يظهر مرتين: في منزلة الآلاف (${N(5000)}) وفي منزلة العشرات (${E(50)}).`},
+ {t:'fill',q:`اكتب عدداً يكون ناتج تقريبه إلى أقرب مئة هو ${N(5500)}`,f:'<div class="eq">{0}</div>',o:[[5449,5537,5551,5600]],a:[v=>Math.round(v/100)*100===5500],ex:5537,w:`أي عدد من ${N(5450)} إلى ${N(5549)} يصلح، مثل ${N(5537)}.`},
+ {t:'fill',q:`قرّب العدد ${N(421906)} إلى أقرب مئة ألف.`,f:'<div class="eq">{0}</div>',o:[[400000,420000,422000,500000]],a:[400000],w:'رقم عشرات الآلاف هو 2 (أقل من 5)، فيبقى رقم مئات الآلاف 4 ونكتب أصفاراً: ' +'400 000'.replace(/.*/,m=>E(m))},
+ {t:'fill',q:'قرّب كل عدد إلى منزلة الرقم الذي تحته خط.',f:`<div class="eq">${E('12<u>8</u> 955')} ≈ {0}</div><div class="eq">${E('<u>2</u>60 656')} ≈ {1}</div>`,o:[[128000,129000,130000,120000],[200000,260000,300000,260700]],a:[129000,300000],w:`الأول: الرقم 8 في الآلاف والرقم بعده 9 فنزيد 1: ${N(129000)}. الثاني: الرقم 2 في مئات الآلاف والرقم بعده 6 فنزيد 1: ${N(300000)}.`}
+]},
+{n:'حديقة البدع',ic:'🌳',qs:[
+ {t:'fill',q:'بكم يزيد عدد زوار حديقة البدع عام 2022 عن عدد زواره عام 2021؟ (الطرح)',v:park,f:`<div style="text-align:center"><div class="vcol"><div class="vr"><b></b><span>44 539</span></div><div class="vr ln"><b>−</b><span>29 520</span></div>{0}</div></div>`,o:[[15019,15119,14019,25019]],a:[15019],w:`${E('44 539 − 29 520 = 15 019')}`},
+ {t:'fill',q:'أوجد مجموع زوار حديقة البدع لعامي 2022 و2021. (الجمع)',v:park,f:`<div style="text-align:center"><div class="vcol"><div class="vr"><b></b><span>44 539</span></div><div class="vr ln"><b>+</b><span>29 520</span></div>{0}</div></div>`,o:[[74059,74069,64059,73959]],a:[74059],w:`${E('44 539 + 29 520 = 74 059')}`}
+]},
+{n:'خاصية التوزيع',ic:'🧩',qs:[
+ {t:'fill',q:`استعمل خاصية التوزيع لإيجاد ناتج الضرب ${E('3 × 32')}`,f:`<div class="eq">3 × 32 = 3 × (30 + {0})</div><div class="eq">= 3 × 30 + ( {1} × {2} )</div><div class="eq">= {3} + {4}</div><div class="eq">= {5}</div>`,o:[[2,3,30,32],[3,30,2,32],[2,3,30,32],[9,60,90,96],[3,5,6,32],[90,96,69,102]],a:[2,3,2,90,6,96],w:`${E('3 × 32 = 3 × (30 + 2) = 90 + 6 = 96')}`},
+ {t:'mc',q:`قال فواز إنه استعمل خاصية التوزيع لكتابة ${E('4 + (8 + 3) = (4 + 8) + (4 + 3)')}. ما الخطأ الذي وقع فيه فواز؟`,o:['وزّع الجمع على الجمع، والمفروض أن يوزّع الضرب على الجمع','حسب ناتج 8 + 3 بشكل خاطئ','بدّل ترتيب الأعداد فقط (خاصية الإبدال)'],a:0,w:`${E('4 + (8 + 3) = 15')} لكن ${E('(4 + 8) + (4 + 3) = 19')}، فالطرفان غير متساويين.`},
+ {t:'mc',q:'اختر التصحيح الصحيح لجملة فواز باستعمال خاصية التوزيع:',o:[E('4 × (8 + 3) = (4 × 8) + (4 × 3)'),E('4 × (8 + 3) = (4 × 8) + 3'),E('4 + (8 + 3) = (4 × 8) + (4 × 3)')],a:0,w:`${E('4 × 11 = 44')} و ${E('32 + 12 = 44')}`}
+]},
+{n:'نواتج الضرب الجزئية',ic:'✖️',qs:[
+ {t:'fill',q:`أكمل العملية الحسابية باستعمال نواتج الضرب الجزئية: ${E('315 × 3')}`,f:`<div class="eq">5 × 3 = {0}</div><div class="eq">10 × 3 = {1}</div><div class="eq">300 × 3 = {2}</div><div class="eq">{3} = 15 + 30 + 900</div>`,o:[[8,15,35,150],[13,30,300,45],[90,300,900,9000],[915,935,945,954]],a:[15,30,900,945],w:`${E('15 + 30 + 900 = 945')}`},
+ {t:'fill',q:`أوجد ناتج الضرب ${E('72 × 5')}`,f:`<div>العدد المحمول بعد ضرب 2 × 5 = 10 هو: {0}</div><div class="eq">72 × 5 = {1}</div>`,o:[[0,1,2,10],[350,360,370,3600]],a:[1,360],w:`${E('2 × 5 = 10')} نكتب 0 ونحمل 1، ثم ${E('7 × 5 = 35')} و ${E('35 + 1 = 36')}، فالناتج ${E(360)}.`}
+]}
+];
+
+const $=s=>document.querySelector(s);
+const app=$('#app'),bar=$('#bar');
+const total=S.reduce((a,s)=>a+s.qs.length*2,0);
+let si=0,qi=0,tries=0,done=false,res=S.map(()=>0),sel=new Set();
+const sum=()=>res.reduce((a,b)=>a+b,0);
+const num=v=>{v=v.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[\s,٬]/g,'');return /^\d+$/.test(v)?+v:NaN};
+
+function head(){
+  bar.innerHTML=S.map((s,i)=>`<span class="dot ${i<si?'ok':i===si?'cur':''}" title="${s.n}">${s.ic}</span>`).join('')+`<b class="score">⭐ ${E(sum())}</b>`;
+}
+function intro(){
+  head();const s=S[si];
+  app.innerHTML=`<div class="meta"><span>المرحلة ${E(si+1)} من ${E(S.length)}</span></div>
+  <h2 class="big">${s.ic} ${s.n}</h2>
+  <p>${si===0?'اجمع أكبر عدد من النجوم! نجمتان لكل إجابة صحيحة من المحاولة الأولى، ونجمة واحدة من المحاولة الثانية.':''} في هذه المرحلة ${E(s.qs.length)} أسئلة.</p>
+  <div class="row"><button class="btn" id="go">ابدأ</button></div>`;
+  $('#go').onclick=ask;
+}
+function ask(){
+  tries=0;done=false;sel=new Set();head();
+  const s=S[si],q=s.qs[qi];
+  let h=`<div class="meta"><span>${s.ic} ${s.n}</span><span>السؤال ${E(qi+1)} من ${E(s.qs.length)}</span></div><div class="q">${q.q}</div>`;
+  if(q.v)h+=`<div class="vis">${q.v()}</div>`;
+  if(q.t==='mc'||q.t==='multi')h+=`<div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}"><b class="L">${q.t==='multi'?'✓':'ABCD'[i]}</b><span>${o}</span></button>`).join('')}</div>`;
+  if(q.t==='fill')h+=`<div class="fill">${q.f.replace(/\{(\d+)\}/g,(m,i)=>`<select class="in" dir="ltr" data-i="${i}" aria-label="اختر الإجابة"><option value="">اختر</option>${[...q.o[i]].sort((x,y)=>x-y).map(x=>`<option value="${x}">${String(x).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}</option>`).join('')}</select>`)}</div>`;
+  h+=`<div id="fb" class="fb" aria-live="polite"></div><div class="row"><button class="btn" id="chk" ${q.t==='mc'?'hidden':''}>تحقق</button><button class="btn alt" id="nx" hidden>${qi===s.qs.length-1?(si===S.length-1?'النتيجة':'إنهاء المرحلة'):'التالي'}</button></div>`;
+  app.innerHTML=h;
+  $('#nx').onclick=next;
+  const opts=[...app.querySelectorAll('.opt')];
+  if(q.t==='mc')opts.forEach(b=>b.onclick=()=>{
+    if(done)return;const i=+b.dataset.i;
+    if(i===q.a){b.classList.add('good');finish(tries===0?2:1)}
+    else{tries++;b.classList.add('bad','shake');b.disabled=true;
+      if(tries>=2){opts[q.a].classList.add('good');finish(0)}else fb('ليست هذه الإجابة، جرّب مرة أخرى 💪',false)}
+  });
+  if(q.t==='multi'){
+    opts.forEach(b=>b.onclick=()=>{if(done)return;const i=+b.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);b.classList.toggle('sel')});
+    $('#chk').onclick=()=>{
+      if(done)return;
+      const ok=sel.size===q.c.length&&q.c.every(i=>sel.has(i));
+      if(ok){opts.forEach((b,i)=>b.classList.toggle('good',q.c.includes(i)));finish(tries===0?2:1)}
+      else{tries++;if(tries>=2){opts.forEach((b,i)=>{b.classList.remove('sel');b.classList.toggle('good',q.c.includes(i))});finish(0)}else fb('اختر مرة أخرى؛ قد تكون هناك أكثر من قيمة صحيحة 💪',false)}
+    };
+  }
+  if(q.t==='fill'){
+    const ins=[...app.querySelectorAll('.in')];ins[0].focus();
+    const go=()=>{
+      if(done)return;
+      let all=true;
+      ins.forEach((x,i)=>{const v=num(x.value),a=q.a[i];const ok=typeof a==='function'?a(v):v===a;
+        x.classList.toggle('good',ok);x.classList.toggle('bad',!ok);if(!ok)all=false});
+      if(all){finish(tries===0?2:1)}
+      else{tries++;
+        if(tries>=2){ins.forEach((x,i)=>{const a=q.a[i];x.value=typeof a==='function'?q.ex:a;x.classList.remove('bad');x.classList.add('good')});finish(0)}
+        else{app.querySelector('.fill').classList.add('shake');fb('بعض الإجابات تحتاج مراجعة، جرّب مرة أخرى 💪',false)}}
+    };
+    $('#chk').onclick=go;ins.forEach(x=>x.addEventListener('keydown',e=>{if(e.key==='Enter')go()}));
+  }
+}
+function fb(t,g){const f=$('#fb');f.className='fb '+(g?'g':'b');f.textContent=t}
+function finish(p){
+  done=true;res[si]+=p;head();
+  const q=S[si].qs[qi],f=$('#fb');
+  f.className='fb '+(p?'g':'b');
+  f.innerHTML=(p===2?'ممتاز! ⭐⭐':p===1?'أحسنت! ⭐':'الإجابة الصحيحة ظاهرة أمامك، ركّز في الشرح:')+`<div class="why">${q.w}</div>`;
+  app.querySelectorAll('.in').forEach(x=>x.disabled=true);
+  app.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+  $('#chk').hidden=true;$('#nx').hidden=false;$('#nx').focus();
+}
+function next(){
+  qi++;
+  if(qi>=S[si].qs.length){si++;qi=0;if(si>=S.length)return end();return intro()}
+  ask();
+}
+function end(){
+  si=S.length;head();
+  const p=Math.round(sum()/total*100);
+  const st=p>=85?3:p>=60?2:1;
+  const weak=S.filter((s,i)=>res[i]<s.qs.length*2*0.6);
+  app.innerHTML=`<h2 class="big">🏆 أنهيت الرحلة!</h2>
+  <div class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div>
+  <p>جمعت ${E(sum())} من ${E(total)} نجمة (${E(p+'%')})</p>
+  ${S.map((s,i)=>`<div class="res"><span>${s.ic} ${s.n}</span><span>${E(res[i]+' / '+s.qs.length*2)}</span></div>`).join('')}
+  <p>${weak.length?'تدرّب أكثر على: '+weak.map(s=>s.n).join('، ')+'.':'أداء رائع في جميع المراحل!'}</p>
+  <div class="row"><button class="btn" id="again">العب مرة أخرى</button></div>`;
+  $('#again').onclick=()=>{si=0;qi=0;res=S.map(()=>0);intro()};
+}
+intro();
+</script>
+</body>
+</html>
